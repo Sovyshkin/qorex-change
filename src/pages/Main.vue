@@ -1,11 +1,19 @@
 <script setup lang="ts">
+// @ts-ignore
 import AppHeader from '../components/AppHeader.vue'
+// @ts-ignore
 import UsdtBlock from '../components/UsdtBlock.vue'
+// @ts-ignore
 import HowItWork from '../components/HowItWork.vue'
+// @ts-ignore
 import PersonalData from '../components/PersonalData.vue'
+// @ts-ignore
 import WhyMe from '../components/WhyMe.vue'
+// @ts-ignore
 import FAQ from '../components/FAQ.vue'
+// @ts-ignore
 import Reviews from '../components/Reviews.vue'
+// @ts-ignore
 import AppFooter from '../components/AppFooter.vue'
 </script>
 

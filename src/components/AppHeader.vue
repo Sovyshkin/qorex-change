@@ -7,12 +7,11 @@
     <!-- Desktop Navigation -->
     <nav class="list-group desktop-nav">
       <li
-        v-for="(item, index) in navigation" 
+        v-for="item in navigation" 
         :key="item.name" 
         class="item-group"
         @click="scrollToSection(item.href)"
         v-motion-slide-visible-top
-        :delay="(index + 1) * 150"
       >
         {{ item.name }}
       </li>
@@ -38,7 +37,7 @@
       <div v-if="isMobileMenuOpen" class="mobile-menu">
         <nav class="mobile-nav">
           <li
-            v-for="(item, index) in navigation" 
+            v-for="item in navigation" 
             :key="item.name" 
             class="mobile-item"
             @click="scrollToSection(item.href)"
