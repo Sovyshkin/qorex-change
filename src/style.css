@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Grid Background Pattern */
+.grid-background {
+  background-color: black;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 116.5px 116.5px;
+}
+
+.grid-background-subtle {
+  background-color: #1f2937;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 58.25px 58.25px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+* {
+  font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    padding: 0px;
+  margin: 0px;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Стили для выделения текста на всем сайте */
+::selection {
+  background-color: #BEF80D;
+  color: #000;
+}
+
+::-moz-selection {
+  background-color: #BEF80D;
+  color: #000;
+}
+
+/* Дополнительная адаптивность и оптимизация */
+@media (max-width: 1024px) {
+  .grid-background {
+    background-size: 80px 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .grid-background {
+    background-size: 60px 60px;
+  }
+  
+  /* Оптимизация прокрутки на мобильных */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+    min-width: 280px;
+  }
+  
+  .grid-background {
+    background-size: 40px 40px;
+  }
+  
+  /* Улучшение производительности на слабых устройствах */
+  * {
+    will-change: auto;
+  }
+}
+
+/* Улучшения для touch устройств */
+@media (hover: none) and (pointer: coarse) {
+  button, a, .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Скрытие горизонтального скролла */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Оптимизация анимаций для слабых устройств */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
