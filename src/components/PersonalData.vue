@@ -27,12 +27,12 @@
                 <span>макс. 5 000 USDT</span>
             </div>
         </div>
-        <div class="right" v-motion-slide-visible-right :delay="200">
-            <h3>Персональные данные</h3>
+        <form class="right" v-motion-slide-visible-right :delay="200" role="form" aria-labelledby="exchange-title">
+            <h3 id="exchange-title">Персональные данные</h3>
             <span class="exchange-rate" style="color: white;">Курс: 1 USDT = 83.53 RUB</span>
             <span class="exchange-subtitle">Курс обновляется каждые несколько секунд.</span>
-            <input type="text" placeholder="Ваш телеграмм">
-            <input type="text" placeholder="Ваш email">
+            <input type="text" placeholder="Ваш телеграмм" aria-label="Ваш телеграмм">
+            <input type="email" placeholder="Ваш email" aria-label="Ваш email">
             <h4>Реквизиты SBP RUB</h4>
             <input type="text" placeholder="Номер телефона СБП">
             <h4>Реквизиты кошелька</h4>
@@ -52,8 +52,8 @@
                 <input type="checkbox" id="agreement2">
                 <label for="agreement2">Я согласен с Политикой конфидециальности</label>
             </div>
-            <button class="btn">Создать заявку</button>
-        </div>
+            <button type="submit" class="btn">Создать заявку</button>
+        </form>
     </div>
 </template>
 <style scoped>

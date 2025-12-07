@@ -21,26 +21,30 @@ import AppFooter from '../components/AppFooter.vue'
   <div class="min-h-screen grid-background">
     <AppHeader />
 
-    <main class="main-content">
+    <main class="main-content" role="main">
       <!-- USDT Block Section -->
-      <section id="service">
+      <section id="service" aria-labelledby="service-title">
         <UsdtBlock />
         <HowItWork />
       </section>
       
       <!-- Personal Data Section -->
-      <section id="change">
+      <section id="change" aria-labelledby="exchange-title">
         <PersonalData />
       </section>
       
       <!-- Why Me Section -->
-      <WhyMe />
+      <section aria-labelledby="advantages-title">
+        <WhyMe />
+      </section>
       
       <!-- Reviews Section -->
-      <Reviews />
+      <section aria-labelledby="reviews-title">
+        <Reviews />
+      </section>
       
       <!-- FAQ Section -->
-      <section id="faq">
+      <section id="faq" aria-labelledby="faq-title">
         <FAQ />
       </section>
     </main>

@@ -19,7 +19,7 @@ const cards = [{
 </script>
 <template>
   <div class="wrap">
-    <h1 v-motion-slide-visible-top>Почему Qorex Fast Change — правильный выбор?</h1>
+    <h2 id="advantages-title" v-motion-slide-visible-top>Почему Qorex Fast Change — правильный выбор?</h2>
     
     <!-- Первый ряд -->
     <div class="cards-row">

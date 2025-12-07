@@ -82,8 +82,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="reviews-section">
-    <h1 v-motion-slide-visible-top>Отзывы наших клиентов</h1>
+  <section class="reviews-section">
+    <h2 id="reviews-title" v-motion-slide-visible-top>Отзывы наших клиентов</h2>
     
     <div 
       class="reviews-container"
@@ -159,7 +159,7 @@ onUnmounted(() => {
         ></button>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>

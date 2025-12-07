@@ -43,8 +43,8 @@ const toggleFAQ = (id) => {
 </script>
 
 <template>
-  <div class="faq-section">
-    <h1 v-motion-slide-visible-top>Часто задаваемые вопросы</h1>
+  <section class="faq-section">
+    <h2 id="faq-title" v-motion-slide-visible-top>Часто задаваемые вопросы</h2>
     
     <div class="faq-container">
       <div 
@@ -74,7 +74,7 @@ const toggleFAQ = (id) => {
         </transition>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>

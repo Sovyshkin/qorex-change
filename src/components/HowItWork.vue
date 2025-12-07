@@ -1,30 +1,34 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import icon1 from '../assets/block-2-1.svg'
+import icon2 from '../assets/block-2-2.svg'
+import icon3 from '../assets/block-2-3.svg'
+import icon4 from '../assets/block-2-4.svg'
 
 const steps = ref([
   {
     id: 1,
     title: 'Указываете адрес кошелька',
     description: 'Вводите TRC20-адрес кошелька, куда хотите получить свои USDT',
-    icon: '/src/assets/block-2-1.svg'
+    icon: icon1
   },
   {
     id: 2,
     title: 'Указываете сумму',
     description: 'Выбираете сколько хотите получить',
-    icon: '/src/assets/block-2-2.svg'
+    icon: icon2
   },
   {
     id: 3,
     title: 'Оплачиваете удобно',
     description: 'Оплата занимает меньше минуты',
-    icon: '/src/assets/block-2-3.svg'
+    icon: icon3
   },
   {
     id: 4,
     title: 'Получаете валюту',
     description: 'Быстрее, чем вы успеете открыть приложение кошелька',
-    icon: '/src/assets/block-2-4.svg'
+    icon: icon4
   }
 ])
 </script>
@@ -33,22 +37,23 @@ const steps = ref([
   <section class="how-it-works">
       <h2 class="section-title">Как это работает</h2>
       
-      <div class="steps-grid">
-        <div 
+      <ol class="steps-grid" role="list">
+        <li 
           v-for="step in steps" 
           :key="step.id"
           class="step-card"
           v-motion-slide-visible-bottom
           :delay="step.id * 100"
+          role="listitem"
         >
           <div class="step-icon">
-            <img :src="step.icon" :alt="`Step ${step.id} icon`" />
+            <img :src="step.icon" :alt="`Шаг ${step.id}: ${step.title}`" />
           </div>
-          <div class="dot"></div>
+          <div class="dot" aria-hidden="true"></div>
           <h3 class="step-title">{{ step.title }}</h3>
           <p class="step-description">{{ step.description }}</p>
-        </div>
-      </div>
+        </li>
+      </ol>
   </section>
 </template>
 

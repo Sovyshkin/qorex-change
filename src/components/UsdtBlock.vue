@@ -1,8 +1,8 @@
 <script setup></script>
 <template>
     <section class="usdt-block">
-        <div class="left" v-motion-slide-visible-left>
-                <h1>
+        <header class="left" v-motion-slide-visible-left>
+                <h1 id="service-title">
                     <span class="green">USDT за пару минут.</span><br>
 Быстро, безопасно,<br>
 без лишних шагов.
@@ -13,14 +13,14 @@
             платежа.
           </p>
           <div>
-            <button class="btn">
+            <button class="btn" type="button" aria-label="Начать процесс покупки USDT">
               Купить USDT
             </button>
           </div>
-        </div>
-        <div class="right">
-            <img src="../assets/block_1.png" alt="USDT Image" />
-        </div>
+        </header>
+        <figure class="right">
+            <img src="../assets/block_1.png" alt="Криптовалюта USDT - быстрый и безопасный обмен" />
+        </figure>
     </section>
 </template>
 <style scoped>

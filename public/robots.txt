@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://qorex-change.com/sitemap.xml
+
+# Основные директивы для поисковиков
+Crawl-delay: 1
+
+# Запрещаем индексацию служебных страниц (если будут)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_nuxt/
+Disallow: /.well-known/
+
+# Разрешаем доступ к основным ресурсам
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
+Allow: /*.ico
