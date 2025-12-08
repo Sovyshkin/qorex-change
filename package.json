@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/head": "^2.0.0",
     "@vueuse/motion": "^3.0.3",
     "gsap": "^3.13.0",
     "pinia": "^3.0.4",

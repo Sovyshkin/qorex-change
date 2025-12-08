@@ -43,14 +43,19 @@
                 <option value="ton">TON</option>
             </select>
             <input type="text" placeholder="Реквизиты кошелька Tether">
-
-            <div class="group-checkbox">
-                <input type="checkbox" id="agreement">
-                <label for="agreement">Я согласен с Условиями и правилами сервиса</label>
-            </div>
             <div class="group-checkbox">
                 <input type="checkbox" id="agreement2">
-                <label for="agreement2">Я согласен с Политикой конфидециальности</label>
+                <label for="agreement2">
+                  Я согласен с 
+                  <a href="/user-agreement" class="agreement-link" target="_blank">Пользовательским соглашением</a>
+                </label>
+            </div>
+            <div class="group-checkbox">
+                <input type="checkbox" id="privacy">
+                <label for="privacy">
+                  Я согласен с 
+                  <a href="/privacy-policy" class="agreement-link" target="_blank">Политикой конфиденциальности</a>
+                </label>
             </div>
             <button type="submit" class="btn">Создать заявку</button>
         </form>
@@ -253,6 +258,18 @@ input:hover, input:focus, select:hover, select:focus {
     user-select: none;
 }
 
+.agreement-link {
+    color: #BEF80D;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin: 0 4px;
+}
+
+.agreement-link:hover {
+    color: #7ED321;
+    text-decoration: underline;
+}
+
 .btn {
     background-color: #BEF80D;
     padding: 16px 28px;
@@ -278,16 +295,31 @@ input:hover, input:focus, select:hover, select:focus {
 @media (max-width: 768px) {
   .wrap {
     flex-direction: column;
-    padding: 20px 15px;
+    padding: 20px;
     gap: 40px;
+    align-items: center;
   }
   
   .left, .right {
     width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    align-items: center;
   }
   
   .left {
     order: -1; /* Отправляете/Получаете вверху на мобильных */
+  }
+  
+  .right {
+    padding: 20px;
+  }
+  
+  .usdt, .rub {
+    margin: 0;
+    width: 100%;
   }
   
   .wrap-img {
@@ -297,20 +329,27 @@ input:hover, input:focus, select:hover, select:focus {
 
 @media (max-width: 480px) {
   .wrap {
-    padding: 15px 20px;
+    padding: 15px 10px;
+    align-items: center;
   }
   
   .left {
-    padding: 0 10px;
+    padding: 0 15px;
+    width: 100%;
+    margin: 0;
+    align-items: center;
   }
   
   .right {
     padding: 15px;
+    margin: 0;
+    width: 100%;
   }
   
   .usdt, .rub {
     padding: 15px;
-    margin: 0 10px;
+    margin: 0;
+    width: 100%;
   }
   
   .right h3 {

@@ -145,11 +145,16 @@ const steps = ref([
 
 @media (max-width: 768px) {
   .how-it-works {
-    padding: 60px 20px;
+    padding: 30px 0;
   }
   
   .section-title {
     font-size: 28px;
+  }
+  
+  .how-it-works {
+    padding-left: 20px;
+    padding-right: 20px;
   }
   
   .steps-grid {
@@ -175,7 +180,7 @@ const steps = ref([
 
 @media (max-width: 480px) {
   .how-it-works {
-    padding: 40px 15px;
+    padding: 30px 0;
     gap: 40px;
   }
   

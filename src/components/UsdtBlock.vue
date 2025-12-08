@@ -110,12 +110,20 @@ h1 {
 @media (max-width: 768px) {
   .usdt-block {
     flex-direction: column;
-    padding: 60px 20px;
+    padding: 30px 0;
     text-align: center;
   }
   
   .left {
     width: 100%;
+    padding: 0 20px;
+    order: 2;
+  }
+  
+  .right {
+    padding: 0 20px;
+    order: 1;
+    margin-bottom: 30px;
   }
   
   h1 {
@@ -133,13 +141,12 @@ h1 {
   
   .right {
     width: 100%;
-    margin-top: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .usdt-block {
-    padding: 40px 15px;
+    padding: 30px 0;
   }
   
   h1 {

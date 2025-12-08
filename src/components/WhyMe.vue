@@ -82,7 +82,7 @@ const cards = [{
     box-sizing: border-box;
 }
 
-h1 {
+h2 {
     color: #FFFFFF;
     font-size: 36px;
     font-weight: 500;
@@ -210,7 +210,7 @@ h1 {
     padding: 20px;
   }
   
-  h1 {
+  h2 {
     font-size: 32px;
   }
   
@@ -225,11 +225,11 @@ h1 {
 
 @media (max-width: 768px) {
   .wrap {
-    padding: 20px 15px;
+    padding: 30px 20px;
     gap: 30px;
   }
   
-  h1 {
+  h2 {
     font-size: 28px;
     text-align: center;
   }
@@ -266,11 +266,11 @@ h1 {
 
 @media (max-width: 480px) {
   .wrap {
-    padding: 15px 10px;
+    padding: 30px 20px;
     gap: 25px;
   }
   
-  h1 {
+  h2 {
     font-size: 24px;
     margin-bottom: 10px;
   }

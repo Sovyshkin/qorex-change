@@ -1,6 +1,6 @@
 <template>
   <header class="header" v-motion-fade-in>
-    <div class="logo" v-motion-slide-visible-left>
+    <div class="logo" v-motion-slide-visible-left @click="goToHome">
       <img :src="logoSvg" alt="Logo">
     </div>
     
@@ -10,7 +10,7 @@
         v-for="item in navigation" 
         :key="item.name" 
         class="item-group"
-        @click="scrollToSection(item.href)"
+        @click="handleNavigation(item)"
         v-motion-slide-visible-top
       >
         {{ item.name }}
@@ -40,7 +40,7 @@
             v-for="item in navigation" 
             :key="item.name" 
             class="mobile-item"
-            @click="scrollToSection(item.href)"
+            @click="handleNavigation(item)"
           >
             {{ item.name }}
           </li>
@@ -63,9 +63,9 @@ import logoSvg from '../assets/logo.svg'
 const isMobileMenuOpen = ref(false)
 
 const navigation = [
-  { name: 'О сервисе', href: 'service' },
-  { name: 'Правила обмена', href: 'change' },
-  { name: 'FAQ', href: 'faq' },
+  { name: 'О сервисе', href: 'service', type: 'scroll' },
+  { name: 'Правила обмена', href: '/exchange-rules', type: 'route' },
+  { name: 'FAQ', href: 'faq', type: 'scroll' },
 ]
 
 const toggleMobileMenu = () => {
@@ -76,20 +76,39 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
 
-// Функция скролла к секции
-const scrollToSection = (href: string) => {
-  const element = document.getElementById(href)
-  if (element) {
-    const headerHeight = 80 // Высота фиксированного хедера
-    const elementPosition = element.offsetTop - headerHeight
-    
-    window.scrollTo({
-      top: elementPosition,
-      behavior: 'smooth'
-    })
+// Функция навигации
+const handleNavigation = (item: any) => {
+  if (item.type === 'route') {
+    window.location.href = item.href
+  } else if (item.type === 'scroll') {
+    // Если находимся не на главной странице, переходим на неё
+    if (window.location.pathname !== '/') {
+      window.location.href = '/#' + item.href
+    } else {
+      // Если на главной, скроллим к элементу
+      const element = document.getElementById(item.href)
+      if (element) {
+        const headerHeight = 80
+        const elementPosition = element.offsetTop - headerHeight
+        
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        })
+      }
+    }
   }
-  closeMobileMenu() // Закрываем мобильное меню
+  closeMobileMenu()
 }
+
+// Функция перехода на главную страницу
+const goToHome = () => {
+  if (window.location.pathname !== '/') {
+    window.location.href = '/'
+  }
+}
+
+
 
 // Закрытие меню при клике вне его
 const handleClickOutside = (event: MouseEvent) => {
@@ -140,6 +159,7 @@ onUnmounted(() => {
 .logo {
   z-index: 20;
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .logo:hover {

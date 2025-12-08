@@ -7,6 +7,21 @@ const routes = [
     name: 'Main',
     component: Main
   },
+  {
+    path: '/exchange-rules',
+    name: 'ExchangeRules',
+    component: () => import('../views/ExchangeRulesView.vue')
+  },
+  {
+    path: '/user-agreement',
+    name: 'UserAgreement',
+    component: () => import('../views/UserAgreementView.vue')
+  },
+  {
+    path: '/privacy-policy',
+    name: 'PrivacyPolicy',
+    component: () => import('../views/PrivacyPolicyView.vue')
+  },
   // Здесь можно добавить другие маршруты
   // {
   //   path: '/trading',

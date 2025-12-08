@@ -89,7 +89,7 @@ const toggleFAQ = (id) => {
   box-sizing: border-box;
 }
 
-h1 {
+h2 {
   color: #FFFFFF;
   font-size: 36px;
   font-weight: 500;
@@ -239,17 +239,17 @@ h1 {
     padding: 20px;
   }
   
-  h1 {
+  h2 {
     font-size: 32px;
   }
 }
 
 @media (max-width: 768px) {
   .faq-section {
-    padding: 20px 15px;
+    padding: 30px 20px;
   }
   
-  h1 {
+  h2 {
     font-size: 28px;
   }
   
@@ -273,10 +273,10 @@ h1 {
 
 @media (max-width: 480px) {
   .faq-section {
-    padding: 15px 10px;
+    padding: 30px 20px;
   }
   
-  h1 {
+  h2 {
     font-size: 24px;
     margin-bottom: 20px;
   }
