@@ -22,6 +22,9 @@ import AppFooter from '../components/AppFooter.vue'
     <AppHeader />
 
     <main class="main-content" role="main">
+      <a href="https://freekassa.net" target="_blank" rel="noopener noreferrer">
+  <img src="https://cdn.freekassa.net/banners/small-dark-1.png" title="Прием платежей на сайте">
+</a>
       <!-- USDT Block Section -->
       <section id="service" aria-labelledby="service-title">
         <UsdtBlock />
