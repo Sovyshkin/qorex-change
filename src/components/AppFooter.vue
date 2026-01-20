@@ -67,6 +67,18 @@ const handleNavigation = (item: any) => {
       </div>
       <span class="telegram-username">@qorex_support</span>
     </div>
+
+    <!-- Desktop Legal Information -->
+    <div class="legal-info desktop-legal" v-motion-slide-visible-right :delay="100">
+      <div class="legal-item">
+        <span class="legal-label">ИНН:</span>
+        <span class="legal-value">501806456002</span>
+      </div>
+      <div class="legal-item">
+        <span class="legal-label">Наименование ИП:</span>
+        <span class="legal-value">ИП Баскакова И.А.</span>
+      </div>
+    </div>
     
     <!-- Mobile Navigation (Always Visible) -->
     <nav class="mobile-nav">
@@ -236,6 +248,34 @@ const handleNavigation = (item: any) => {
   display: none;
 }
 
+/* Legal Information */
+.legal-info {
+  display: none;
+}
+
+.desktop-legal {
+  display: block;
+  text-align: right;
+}
+
+.legal-item {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #9AA0A0;
+  justify-content: flex-end;
+}
+
+.legal-label {
+  font-weight: 500;
+  color: #BEF80D;
+}
+
+.legal-value {
+  line-height: 1.4;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footer {
@@ -253,7 +293,8 @@ const handleNavigation = (item: any) => {
   }
   
   .desktop-nav,
-  .desktop-contact {
+  .desktop-contact,
+  .desktop-legal {
     display: none;
   }
   
@@ -287,6 +328,17 @@ const handleNavigation = (item: any) => {
     justify-content: center;
     padding: 10px 20px;
   }
+
+  .legal-info {
+    display: block;
+    text-align: center;
+    padding: 15px 20px 0;
+    border-top: 1px solid rgba(190, 248, 13, 0.2);
+  }
+
+  .legal-info .legal-item {
+    justify-content: center;
+  }
   
   .logo img {
     height: 35px;
@@ -314,6 +366,15 @@ const handleNavigation = (item: any) => {
   
   .mobile-contact {
     padding: 8px 16px;
+  }
+
+  .legal-info {
+    display: block;
+    padding: 10px 20px 0;
+  }
+
+  .legal-item {
+    font-size: 10px;
   }
   
   .telegram-username {
