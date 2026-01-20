@@ -40,43 +40,34 @@ const handleNavigation = (item: any) => {
 
 <template>
   <footer class="footer" v-motion-fade-visible>
-    <div class="logo" v-motion-slide-visible-left>
-      <img :src="logoSvg" alt="Logo">
-    </div>
-    
-    <!-- Desktop Navigation -->
-    <nav class="desktop-nav">
-      <li
-        v-for="item in desktopNavigation" 
-        :key="item.name" 
-        class="item-group"
-        v-motion-slide-visible-top
-        :delay="50"
-        @click="handleNavigation(item)"
-      >
-        {{ item.name }}
-      </li>
-    </nav>
-    
-    <!-- Telegram Contact -->
-    <div class="telegram-contact desktop-contact" v-motion-slide-visible-right>
-      <div class="telegram-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.38.24-1.07.7-.96.64-1.99 1.27-2.17 1.35-.63.3-1.22.32-1.78.13-.24-.08-.43-.15-.59-.2-.2-.06-.43-.13-.37-.27.06-.14.27-.28.64-.46l2.37-.93c1.11-.44 2.25-.94 2.25-.94s.8-.26 1.3.16c.5.42.42 1.19.42 1.19z" fill="currentColor"/>
-        </svg>
+    <!-- Main Footer Content -->
+    <div class="footer-main">
+      <div class="logo" v-motion-slide-visible-left>
+        <img :src="logoSvg" alt="Logo">
       </div>
-      <span class="telegram-username">@qorex_support</span>
-    </div>
-
-    <!-- Desktop Legal Information -->
-    <div class="legal-info desktop-legal" v-motion-slide-visible-right :delay="100">
-      <div class="legal-item">
-        <span class="legal-label">ИНН:</span>
-        <span class="legal-value">501806456002</span>
-      </div>
-      <div class="legal-item">
-        <span class="legal-label">Наименование ИП:</span>
-        <span class="legal-value">ИП Баскакова И.А.</span>
+      
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav">
+        <li
+          v-for="item in desktopNavigation" 
+          :key="item.name" 
+          class="item-group"
+          v-motion-slide-visible-top
+          :delay="50"
+          @click="handleNavigation(item)"
+        >
+          {{ item.name }}
+        </li>
+      </nav>
+      
+      <!-- Telegram Contact -->
+      <div class="telegram-contact desktop-contact" v-motion-slide-visible-right>
+        <div class="telegram-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.38.24-1.07.7-.96.64-1.99 1.27-2.17 1.35-.63.3-1.22.32-1.78.13-.24-.08-.43-.15-.59-.2-.2-.06-.43-.13-.37-.27.06-.14.27-.28.64-.46l2.37-.93c1.11-.44 2.25-.94 2.25-.94s.8-.26 1.3.16c.5.42.42 1.19.42 1.19z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="telegram-username">@qorex_support</span>
       </div>
     </div>
     
@@ -103,20 +94,39 @@ const handleNavigation = (item: any) => {
       </div>
       <span class="telegram-username">@qorex_support</span>
     </div>
+
+    <!-- Desktop Legal Information (Bottom) -->
+    <div class="legal-info desktop-legal" v-motion-slide-visible-up :delay="200">
+      <div class="legal-item">
+        <span class="legal-label">ИНН:</span>
+        <span class="legal-value">501806456002</span>
+      </div>
+      <div class="legal-item">
+        <span class="legal-label">ИП:</span>
+        <span class="legal-value">Баскакова Ирина Анатольевна</span>
+      </div>
+    </div>
   </footer>
 </template>
 
 <style scoped>
 .footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 15px;
   padding: 20px 40px;
   position: relative;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(190, 248, 13, 0.1);
   margin-top: 60px;
+}
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .logo {
@@ -255,25 +265,30 @@ const handleNavigation = (item: any) => {
 
 .desktop-legal {
   display: block;
-  text-align: right;
+  text-align: center;
+  opacity: 0.7;
+  padding-top: 10px;
+  border-top: 1px solid rgba(190, 248, 13, 0.1);
 }
 
 .legal-item {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 4px;
-  font-size: 12px;
-  color: #9AA0A0;
-  justify-content: flex-end;
+  display: inline-flex;
+  gap: 4px;
+  margin: 0 15px 2px 0;
+  font-size: 10px;
+  color: #666;
+  align-items: center;
 }
 
 .legal-label {
-  font-weight: 500;
-  color: #BEF80D;
+  font-weight: 400;
+  color: #888;
+  opacity: 0.8;
 }
 
 .legal-value {
-  line-height: 1.4;
+  line-height: 1.2;
+  color: #999;
 }
 
 /* Responsive Design */
@@ -285,11 +300,15 @@ const handleNavigation = (item: any) => {
 
 @media (max-width: 768px) {
   .footer {
-    flex-direction: column;
     gap: 25px;
     padding: 30px 20px;
     align-items: center;
     text-align: center;
+  }
+
+  .footer-main {
+    flex-direction: column;
+    gap: 25px;
   }
   
   .desktop-nav,
@@ -332,12 +351,15 @@ const handleNavigation = (item: any) => {
   .legal-info {
     display: block;
     text-align: center;
-    padding: 15px 20px 0;
-    border-top: 1px solid rgba(190, 248, 13, 0.2);
+    padding: 10px 20px 0;
+    border-top: 1px solid rgba(190, 248, 13, 0.1);
+    opacity: 0.6;
   }
 
   .legal-info .legal-item {
     justify-content: center;
+    font-size: 9px;
+    margin-bottom: 1px;
   }
   
   .logo img {
@@ -370,11 +392,13 @@ const handleNavigation = (item: any) => {
 
   .legal-info {
     display: block;
-    padding: 10px 20px 0;
+    padding: 8px 20px 0;
+    opacity: 0.5;
   }
 
   .legal-item {
-    font-size: 10px;
+    font-size: 8px;
+    margin-bottom: 0;
   }
   
   .telegram-username {
