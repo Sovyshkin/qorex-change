@@ -7,6 +7,7 @@ import logoSvg from '../assets/logo.svg'
 const desktopNavigation = [
   { name: 'О сервисе', href: '/', type: 'scroll', target: 'service' },
   { name: 'Правила обмена', href: '/exchange-rules', type: 'route' },
+  { name: 'Публичная оферта', href: '/public-offer', type: 'route' },
   { name: 'Пользовательское соглашение', href: '/user-agreement', type: 'route' },
   { name: 'Политика конфиденциальности', href: '/privacy-policy', type: 'route' },
   { name: 'FAQ', href: '/', type: 'scroll', target: 'faq' },
@@ -14,6 +15,7 @@ const desktopNavigation = [
 
 const mobileNavigation = [
   { name: 'О сервисе', href: '/', type: 'scroll', target: 'service' },
+  { name: 'Публичная оферта', href: '/public-offer', type: 'route' },
   { name: 'Пользовательское соглашение', href: '/user-agreement', type: 'route' },
   { name: 'Политика конфиденциальности', href: '/privacy-policy', type: 'route' },
   { name: 'Правила обмена', href: '/exchange-rules', type: 'route' },
@@ -60,14 +62,24 @@ const handleNavigation = (item: any) => {
         </li>
       </nav>
       
-      <!-- Telegram Contact -->
-      <div class="telegram-contact desktop-contact" v-motion-slide-visible-right>
-        <div class="telegram-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.38.24-1.07.7-.96.64-1.99 1.27-2.17 1.35-.63.3-1.22.32-1.78.13-.24-.08-.43-.15-.59-.2-.2-.06-.43-.13-.37-.27.06-.14.27-.28.64-.46l2.37-.93c1.11-.44 2.25-.94 2.25-.94s.8-.26 1.3.16c.5.42.42 1.19.42 1.19z" fill="currentColor"/>
-          </svg>
+      <!-- Contacts -->
+      <div class="contacts-wrapper desktop-contact" v-motion-slide-visible-right>
+        <a href="mailto:support@qorexchange.com" class="contact-item email-contact">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="contact-text">support@qorexchange.com</span>
+        </a>
+        <div class="contact-item telegram-contact">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.38.24-1.07.7-.96.64-1.99 1.27-2.17 1.35-.63.3-1.22.32-1.78.13-.24-.08-.43-.15-.59-.2-.2-.06-.43-.13-.37-.27.06-.14.27-.28.64-.46l2.37-.93c1.11-.44 2.25-.94 2.25-.94s.8-.26 1.3.16c.5.42.42 1.19.42 1.19z" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="contact-text">@qorex_support</span>
         </div>
-        <span class="telegram-username">@qorex_support</span>
       </div>
     </div>
     
@@ -85,14 +97,24 @@ const handleNavigation = (item: any) => {
       </li>
     </nav>
     
-    <!-- Mobile Telegram Contact -->
-    <div class="telegram-contact mobile-contact" v-motion-slide-visible-right>
-      <div class="telegram-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.38.24-1.07.7-.96.64-1.99 1.27-2.17 1.35-.63.3-1.22.32-1.78.13-.24-.08-.43-.15-.59-.2-.2-.06-.43-.13-.37-.27.06-.14.27-.28.64-.46l2.37-.93c1.11-.44 2.25-.94 2.25-.94s.8-.26 1.3.16c.5.42.42 1.19.42 1.19z" fill="currentColor"/>
-        </svg>
+    <!-- Mobile Contacts -->
+    <div class="contacts-wrapper mobile-contact" v-motion-slide-visible-right>
+      <a href="mailto:support@qorexchange.com" class="contact-item email-contact mobile-email">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="contact-text">support@qorexchange.com</span>
+      </a>
+      <div class="contact-item telegram-contact mobile-telegram">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.38.24-1.07.7-.96.64-1.99 1.27-2.17 1.35-.63.3-1.22.32-1.78.13-.24-.08-.43-.15-.59-.2-.2-.06-.43-.13-.37-.27.06-.14.27-.28.64-.46l2.37-.93c1.11-.44 2.25-.94 2.25-.94s.8-.26 1.3.16c.5.42.42 1.19.42 1.19z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="contact-text">@qorex_support</span>
       </div>
-      <span class="telegram-username">@qorex_support</span>
     </div>
 
     <!-- Desktop Legal Information (Bottom) -->
@@ -105,6 +127,10 @@ const handleNavigation = (item: any) => {
         <span class="legal-label">ИП:</span>
         <span class="legal-value">Баскакова Ирина Анатольевна</span>
       </div>
+      <div class="legal-item">
+        <span class="legal-label">ОГРН:</span>
+        <span class="legal-value">326508100012554</span>
+      </div>
     </div>
   </footer>
 </template>
@@ -114,12 +140,14 @@ const handleNavigation = (item: any) => {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 20px 40px;
+  padding: 20px 60px;
   position: relative;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(190, 248, 13, 0.1);
   margin-top: 60px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .footer-main {
@@ -127,6 +155,8 @@ const handleNavigation = (item: any) => {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
 }
 
 .logo {
@@ -184,45 +214,51 @@ const handleNavigation = (item: any) => {
   color: #BEF80D;
 }
 
-/* Telegram Contact */
-.telegram-contact {
+/* Contacts Wrapper */
+.contacts-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 15px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
   border-radius: 100px;
   background: transparent;
-  border: 1px solid #BEF80D;
+  border: 1px solid rgba(190, 248, 13, 0.4);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   text-decoration: none;
 }
 
-.telegram-contact::before {
+.contact-item::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(190, 248, 13, 0.3), transparent);
-  transition: left 0.6s ease;
+  background: linear-gradient(90deg, transparent, rgba(190, 248, 13, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
-.telegram-contact:hover::before {
+.contact-item:hover::before {
   left: 100%;
 }
 
-.telegram-contact:hover {
-  background-color: #BEF80D;
-  color: #000;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(190, 248, 13, 0.3);
+.contact-item:hover {
+  background: linear-gradient(135deg, rgba(190, 248, 13, 0.15), rgba(190, 248, 13, 0.05));
+  border-color: #BEF80D;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(190, 248, 13, 0.2);
 }
 
-.telegram-icon {
+.contact-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -230,20 +266,44 @@ const handleNavigation = (item: any) => {
   color: #BEF80D;
 }
 
-.telegram-contact:hover .telegram-icon {
-  color: #000;
-  transform: scale(1.1);
+.contact-item:hover .contact-icon {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 0 8px rgba(190, 248, 13, 0.6));
 }
 
-.telegram-username {
-  font-weight: 600;
-  font-size: 16px;
+.contact-text {
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.contact-item:hover .contact-text {
   color: #BEF80D;
-  transition: color 0.3s ease;
+  letter-spacing: 0.3px;
 }
 
-.telegram-contact:hover .telegram-username {
-  color: #000;
+.email-contact {
+  border-color: rgba(100, 180, 255, 0.4);
+}
+
+.email-contact .contact-icon {
+  color: #64B4FF;
+}
+
+.email-contact:hover {
+  background: linear-gradient(135deg, rgba(100, 180, 255, 0.15), rgba(100, 180, 255, 0.05));
+  border-color: #64B4FF;
+  box-shadow: 0 10px 30px rgba(100, 180, 255, 0.2);
+}
+
+.email-contact:hover .contact-text {
+  color: #64B4FF;
+}
+
+.email-contact:hover .contact-icon {
+  filter: drop-shadow(0 0 8px rgba(100, 180, 255, 0.6));
 }
 
 /* Mobile Navigation - Always Visible */
@@ -269,6 +329,9 @@ const handleNavigation = (item: any) => {
   opacity: 0.7;
   padding-top: 10px;
   border-top: 1px solid rgba(190, 248, 13, 0.1);
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .legal-item {
@@ -292,9 +355,162 @@ const handleNavigation = (item: any) => {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1700px) and (min-width: 1401px) {
   .footer {
-    padding: 18px 30px;
+    padding: 20px 50px;
+  }
+
+  .desktop-nav {
+    gap: 25px;
+  }
+
+  .item-group {
+    padding: 8px 14px;
+    font-size: 15px;
+  }
+
+  .contacts-wrapper {
+    gap: 14px;
+  }
+
+  .contact-item {
+    padding: 10px 16px;
+  }
+
+  .contact-text {
+    font-size: 14px;
+  }
+
+  .logo img {
+    height: 42px;
+  }
+}
+
+@media (max-width: 1400px) and (min-width: 1201px) {
+  .footer {
+    padding: 18px 40px;
+  }
+
+  .desktop-nav {
+    gap: 22px;
+    flex-wrap: nowrap;
+  }
+
+  .item-group {
+    padding: 7px 13px;
+    font-size: 14px;
+  }
+
+  .contacts-wrapper {
+    gap: 13px;
+  }
+
+  .contact-item {
+    padding: 9px 15px;
+  }
+
+  .contact-text {
+    font-size: 13px;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
+  .legal-item {
+    font-size: 9.5px;
+    margin: 0 13px 2px 0;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .footer {
+    padding: 18px 35px;
+  }
+
+  .desktop-nav {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .item-group {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .contacts-wrapper {
+    gap: 12px;
+  }
+
+  .contact-item {
+    padding: 8px 14px;
+  }
+
+  .contact-text {
+    font-size: 12px;
+  }
+
+  .contact-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .logo img {
+    height: 38px;
+  }
+
+  .legal-item {
+    font-size: 9px;
+    margin: 0 12px 2px 0;
+  }
+}
+
+@media (max-width: 1700px) and (min-width: 769px) {
+  .footer {
+    padding: 16px 30px;
+  }
+
+  .footer-main {
+    gap: 15px;
+  }
+
+  .desktop-nav {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .item-group {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .contacts-wrapper {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .contact-item {
+    padding: 7px 12px;
+  }
+
+  .contact-text {
+    font-size: 11px;
+  }
+
+  .contact-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .logo img {
+    height: 36px;
+  }
+
+  .legal-item {
+    font-size: 8px;
+    margin: 0 10px 2px 0;
   }
 }
 
@@ -344,8 +560,23 @@ const handleNavigation = (item: any) => {
   
   .mobile-contact {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
     padding: 10px 20px;
+    width: 100%;
+  }
+
+  .mobile-contact .contact-item {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  .mobile-email,
+  .mobile-telegram {
+    font-size: 13px;
   }
 
   .legal-info {
@@ -388,6 +619,21 @@ const handleNavigation = (item: any) => {
   
   .mobile-contact {
     padding: 8px 16px;
+    gap: 10px;
+  }
+
+  .mobile-contact .contact-item {
+    padding: 10px 16px;
+    font-size: 11px;
+  }
+
+  .mobile-contact .contact-text {
+    font-size: 11px;
+  }
+
+  .mobile-contact .contact-icon svg {
+    width: 16px;
+    height: 16px;
   }
 
   .legal-info {

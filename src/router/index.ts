@@ -22,6 +22,11 @@ const routes = [
     name: 'PrivacyPolicy',
     component: () => import('../views/PrivacyPolicyView.vue')
   },
+  {
+    path: '/public-offer',
+    name: 'PublicOffer',
+    component: () => import('../views/PublicOfferView.vue')
+  },
   // Здесь можно добавить другие маршруты
   // {
   //   path: '/trading',

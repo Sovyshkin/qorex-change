@@ -205,7 +205,49 @@ h2 {
 }
 
 /* Адаптивность */
-@media (max-width: 1024px) {
+@media (max-width: 1150px) and (min-width: 769px) {
+  .wrap {
+    padding: 20px 30px;
+  }
+  
+  h2 {
+    font-size: 30px;
+  }
+  
+  .cards-row {
+    gap: 15px;
+  }
+  
+  .large-card {
+    padding: 35px;
+    min-height: 200px;
+    max-height: 240px;
+    flex: 1;
+  }
+  
+  .small-card {
+    padding: 25px;
+    min-height: 180px;
+    max-height: 220px;
+    flex: 1;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .desc {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .wrap-icon img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 1151px) {
   .wrap {
     padding: 20px;
   }
