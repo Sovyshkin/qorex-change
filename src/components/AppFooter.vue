@@ -64,6 +64,14 @@ const handleNavigation = (item: any) => {
       
       <!-- Contacts -->
       <div class="contacts-wrapper desktop-contact" v-motion-slide-visible-right>
+        <a href="tel:+78985578149" class="contact-item phone-contact">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="contact-text">+7 985 578-14-96</span>
+        </a>
         <a href="mailto:support@qorexchange.com" class="contact-item email-contact">
           <div class="contact-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -99,6 +107,14 @@ const handleNavigation = (item: any) => {
     
     <!-- Mobile Contacts -->
     <div class="contacts-wrapper mobile-contact" v-motion-slide-visible-right>
+      <a href="tel:+78985578149" class="contact-item phone-contact mobile-phone">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="contact-text">+7 985 578-14-96</span>
+      </a>
       <a href="mailto:support@qorexchange.com" class="contact-item email-contact mobile-email">
         <div class="contact-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -304,6 +320,29 @@ const handleNavigation = (item: any) => {
 
 .email-contact:hover .contact-icon {
   filter: drop-shadow(0 0 8px rgba(100, 180, 255, 0.6));
+}
+
+/* Phone Contact */
+.phone-contact {
+  border-color: rgba(147, 51, 234, 0.4);
+}
+
+.phone-contact .contact-icon {
+  color: #9333EA;
+}
+
+.phone-contact:hover {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(147, 51, 234, 0.05));
+  border-color: #9333EA;
+  box-shadow: 0 10px 30px rgba(147, 51, 234, 0.2);
+}
+
+.phone-contact:hover .contact-text {
+  color: #9333EA;
+}
+
+.phone-contact:hover .contact-icon {
+  filter: drop-shadow(0 0 8px rgba(147, 51, 234, 0.6));
 }
 
 /* Mobile Navigation - Always Visible */
@@ -561,22 +600,34 @@ const handleNavigation = (item: any) => {
   .mobile-contact {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
+    gap: 10px;
+    padding: 0;
     width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   .mobile-contact .contact-item {
     width: 100%;
-    max-width: 320px;
-    justify-content: center;
-    padding: 12px 20px;
+    flex-direction: column;
+    padding: 14px 8px;
+    gap: 8px;
+    text-align: center;
   }
 
-  .mobile-email,
-  .mobile-telegram {
-    font-size: 13px;
+  .mobile-contact .contact-text {
+    font-size: 11px;
+    word-break: break-word;
+    line-height: 1.3;
+  }
+
+  .mobile-contact .contact-icon {
+    margin: 0 auto;
+  }
+
+  .mobile-contact .contact-icon svg {
+    width: 24px;
+    height: 24px;
   }
 
   .legal-info {
@@ -618,22 +669,21 @@ const handleNavigation = (item: any) => {
   }
   
   .mobile-contact {
-    padding: 8px 16px;
-    gap: 10px;
+    gap: 8px;
+    max-width: 100%;
   }
 
   .mobile-contact .contact-item {
-    padding: 10px 16px;
-    font-size: 11px;
+    padding: 12px 6px;
   }
 
   .mobile-contact .contact-text {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .mobile-contact .contact-icon svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
   }
 
   .legal-info {

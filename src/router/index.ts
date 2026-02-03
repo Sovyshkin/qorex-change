@@ -27,6 +27,11 @@ const routes = [
     name: 'PublicOffer',
     component: () => import('../views/PublicOfferView.vue')
   },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import('../pages/account.vue')
+  },
   // Здесь можно добавить другие маршруты
   // {
   //   path: '/trading',
