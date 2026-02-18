@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 // Данные формы
 const rubAmount = ref('')
@@ -16,6 +16,28 @@ const exchangeRate = ref(83.53)
 const isLoading = ref(false)
 const errorMessage = ref('')
 const successMessage = ref('')
+let priceInterval = null
+
+// Получение курса USDT
+const fetchPrice = async () => {
+  try {
+    const response = await fetch('https://back.qorexchange.com/data_price', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    
+    if (response.ok) {
+      const data = await response.json()
+      if (data.price) {
+        exchangeRate.value = parseFloat(data.price)
+      }
+    }
+  } catch (error) {
+    console.error('Ошибка получения курса:', error)
+  }
+}
 
 // Получение геоданных при монтировании компонента
 onMounted(async () => {
@@ -26,6 +48,19 @@ onMounted(async () => {
   } catch (error) {
     console.error('Ошибка получения геоданных:', error)
     geo.value = 'Unknown'
+  }
+  
+  // Получаем курс сразу при загрузке
+  await fetchPrice()
+  
+  // Обновляем курс каждые 15 секунд
+  priceInterval = setInterval(fetchPrice, 15000)
+})
+
+// Очистка интервала при размонтировании
+onUnmounted(() => {
+  if (priceInterval) {
+    clearInterval(priceInterval)
   }
 })
 
@@ -113,20 +148,22 @@ const handleSubmit = async (e) => {
   successMessage.value = ''
   
   try {
-    const response = await fetch('https://back.qorexchange.com/data_buy', {
+    // Формируем query параметры
+    const params = new URLSearchParams({
+      tg_name: tgName.value,
+      email: email.value,
+      phone_num: phoneNum.value,
+      count_usdt: usdtAmount.value,
+      network: network.value,
+      wallet: wallet.value,
+      geo: geo.value
+    })
+    
+    const response = await fetch(`https://back.qorexchange.com/data_buy?${params.toString()}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        tg_name: tgName.value,
-        email: email.value,
-        phone_num: phoneNum.value,
-        count_usdt: usdtAmount.value,
-        network: network.value,
-        wallet: wallet.value,
-        geo: geo.value
-      })
+      }
     })
     
     if (!response.ok) {
