@@ -84,6 +84,15 @@ const updateRub = () => {
   }
 }
 
+// Вычисляемые значения для лимитов RUB
+const minRub = computed(() => {
+  return (5 * exchangeRate.value).toFixed(0)
+})
+
+const maxRub = computed(() => {
+  return (5000 * exchangeRate.value).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+})
+
 // Валидация формы
 const validateForm = () => {
   if (!tgName.value.trim()) {
@@ -202,13 +211,13 @@ const handleSubmit = async (e) => {
                       type="text" 
                       v-model="rubAmount"
                       @input="updateUsdt"
-                      placeholder="500 RUB"
+                      :placeholder="minRub + ' RUB'"
                     >
                     <span>RUB</span>
                     <img src="../assets/rub.svg" alt="rub">
                 </div>
-                <span>мин. 500 RUB</span>
-                <span>макс. 513 000 RUB</span>
+                <span>мин. {{ minRub }} RUB</span>
+                <span>макс. {{ maxRub }} RUB</span>
             </div>
             <div class="wrap-img" v-motion-fade-visible :delay="600">
                 <img src="../assets/change-usdt-rub.svg" alt="change_rub_usdt">
