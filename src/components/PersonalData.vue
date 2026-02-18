@@ -1,11 +1,172 @@
-<script setup></script>
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+
+// Данные формы
+const rubAmount = ref('')
+const usdtAmount = ref('')
+const tgName = ref('')
+const email = ref('')
+const phoneNum = ref('')
+const network = ref('')
+const wallet = ref('')
+const agreement = ref(false)
+const privacy = ref(false)
+const geo = ref('')
+const exchangeRate = ref(83.53)
+const isLoading = ref(false)
+const errorMessage = ref('')
+const successMessage = ref('')
+
+// Получение геоданных при монтировании компонента
+onMounted(async () => {
+  try {
+    const response = await fetch('https://ipapi.co/json/')
+    const data = await response.json()
+    geo.value = `${data.country_name}, ${data.city}, IP: ${data.ip}`
+  } catch (error) {
+    console.error('Ошибка получения геоданных:', error)
+    geo.value = 'Unknown'
+  }
+})
+
+// Автоматический пересчет USDT при изменении RUB
+const updateUsdt = () => {
+  const rub = parseFloat(rubAmount.value)
+  if (!isNaN(rub) && rub > 0) {
+    usdtAmount.value = (rub / exchangeRate.value).toFixed(2)
+  } else {
+    usdtAmount.value = ''
+  }
+}
+
+// Автоматический пересчет RUB при изменении USDT
+const updateRub = () => {
+  const usdt = parseFloat(usdtAmount.value)
+  if (!isNaN(usdt) && usdt > 0) {
+    rubAmount.value = (usdt * exchangeRate.value).toFixed(2)
+  } else {
+    rubAmount.value = ''
+  }
+}
+
+// Валидация формы
+const validateForm = () => {
+  if (!tgName.value.trim()) {
+    errorMessage.value = 'Укажите ваш телеграмм'
+    return false
+  }
+  
+  if (!email.value.trim() || !email.value.includes('@')) {
+    errorMessage.value = 'Укажите корректный email'
+    return false
+  }
+  
+  if (!phoneNum.value.trim()) {
+    errorMessage.value = 'Укажите номер телефона СБП'
+    return false
+  }
+  
+  if (!usdtAmount.value || parseFloat(usdtAmount.value) < 5) {
+    errorMessage.value = 'Минимальная сумма обмена - 5 USDT'
+    return false
+  }
+  
+  if (!usdtAmount.value || parseFloat(usdtAmount.value) > 5000) {
+    errorMessage.value = 'Максимальная сумма обмена - 5000 USDT'
+    return false
+  }
+  
+  if (!network.value) {
+    errorMessage.value = 'Выберите сеть кошелька'
+    return false
+  }
+  
+  if (!wallet.value.trim()) {
+    errorMessage.value = 'Укажите реквизиты кошелька'
+    return false
+  }
+  
+  if (!agreement.value) {
+    errorMessage.value = 'Необходимо согласиться с пользовательским соглашением'
+    return false
+  }
+  
+  if (!privacy.value) {
+    errorMessage.value = 'Необходимо согласиться с политикой конфиденциальности'
+    return false
+  }
+  
+  errorMessage.value = ''
+  return true
+}
+
+// Отправка формы
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  
+  if (!validateForm()) {
+    return
+  }
+  
+  isLoading.value = true
+  errorMessage.value = ''
+  successMessage.value = ''
+  
+  try {
+    const response = await fetch('https://back.qorexchange.com/data_buy', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tg_name: tgName.value,
+        email: email.value,
+        phone_num: phoneNum.value,
+        count_usdt: usdtAmount.value,
+        network: network.value,
+        wallet: wallet.value,
+        geo: geo.value
+      })
+    })
+    
+    if (!response.ok) {
+      throw new Error('Ошибка при создании заявки')
+    }
+    
+    const data = await response.json()
+    successMessage.value = 'Заявка успешно создана! Мы свяжемся с вами в ближайшее время.'
+    
+    // Очистка формы после успешной отправки
+    rubAmount.value = ''
+    usdtAmount.value = ''
+    tgName.value = ''
+    email.value = ''
+    phoneNum.value = ''
+    network.value = ''
+    wallet.value = ''
+    agreement.value = false
+    privacy.value = false
+    
+  } catch (error) {
+    console.error('Ошибка:', error)
+    errorMessage.value = 'Произошла ошибка при создании заявки. Попробуйте еще раз.'
+  } finally {
+    isLoading.value = false
+  }
+}
+</script>
 <template>
     <div class="wrap" v-motion-fade-visible>
         <div class="left" v-motion-slide-visible-left :delay="200">
             <div class="rub" v-motion-slide-visible-top :delay="800">
                 <h3>Отправляете</h3>
                 <div class="group-input">
-                    <input type="text" placeholder="50 RUB">
+                    <input 
+                      type="text" 
+                      v-model="rubAmount"
+                      @input="updateUsdt"
+                      placeholder="500 RUB"
+                    >
                     <span>RUB</span>
                     <img src="../assets/rub.svg" alt="rub">
                 </div>
@@ -19,7 +180,12 @@
             <div class="usdt" v-motion-slide-visible-bottom :delay="400">
                 <h3>Получаете</h3>
                 <div class="group-input">
-                    <input type="text" placeholder="50 USDT">
+                    <input 
+                      type="text" 
+                      v-model="usdtAmount"
+                      @input="updateRub"
+                      placeholder="5 USDT"
+                    >
                     <span>USDT</span>
                     <img src="../assets/usdt.svg" alt="usdt">
                 </div>
@@ -27,37 +193,72 @@
                 <span>макс. 5 000 USDT</span>
             </div>
         </div>
-        <form class="right" v-motion-slide-visible-right :delay="200" role="form" aria-labelledby="exchange-title">
+        <form 
+          class="right" 
+          @submit="handleSubmit"
+          v-motion-slide-visible-right 
+          :delay="200" 
+          role="form" 
+          aria-labelledby="exchange-title"
+        >
             <h3 id="exchange-title">Персональные данные</h3>
-            <span class="exchange-rate" style="color: white;">Курс: 1 USDT = 83.53 RUB</span>
+            <span class="exchange-rate" style="color: white;">Курс: 1 USDT = {{ exchangeRate }} RUB</span>
             <span class="exchange-subtitle">Курс обновляется каждые несколько секунд.</span>
-            <input type="text" placeholder="Ваш телеграмм" aria-label="Ваш телеграмм">
-            <input type="email" placeholder="Ваш email" aria-label="Ваш email">
+            
+            <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+            <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
+            
+            <input 
+              type="text" 
+              v-model="tgName"
+              placeholder="Ваш телеграмм (@username)" 
+              aria-label="Ваш телеграмм"
+              required
+            >
+            <input 
+              type="email" 
+              v-model="email"
+              placeholder="Ваш email" 
+              aria-label="Ваш email"
+              required
+            >
             <h4>Реквизиты SBP RUB</h4>
-            <input type="text" placeholder="Номер телефона СБП">
+            <input 
+              type="text" 
+              v-model="phoneNum"
+              placeholder="Номер телефона СБП"
+              required
+            >
             <h4>Реквизиты кошелька</h4>
-            <select name="" id="">
+            <select v-model="network" required>
                 <option value="" disabled selected>Сеть кошелька</option>
-                <option value="trc20">TRC20</option>
-                <option value="erc20">ERC20</option>
-                <option value="ton">TON</option>
+                <option value="TRC20">TRC20</option>
+                <option value="ERC20">ERC20</option>
+                <option value="TON">TON</option>
             </select>
-            <input type="text" placeholder="Реквизиты кошелька Tether">
+            <input 
+              type="text" 
+              v-model="wallet"
+              placeholder="Реквизиты кошелька Tether"
+              required
+            >
             <div class="group-checkbox">
-                <input type="checkbox" id="agreement2">
+                <input type="checkbox" id="agreement2" v-model="agreement" required>
                 <label for="agreement2">
                   Я согласен с 
                   <a href="/user-agreement" class="agreement-link" target="_blank">Пользовательским соглашением</a>
                 </label>
             </div>
             <div class="group-checkbox">
-                <input type="checkbox" id="privacy">
+                <input type="checkbox" id="privacy" v-model="privacy" required>
                 <label for="privacy">
                   Я согласен с 
                   <a href="/privacy-policy" class="agreement-link" target="_blank">Политикой конфиденциальности</a>
                 </label>
             </div>
-            <button type="submit" class="btn">Создать заявку</button>
+            <button type="submit" class="btn" :disabled="isLoading">
+              {{ isLoading ? 'Отправка...' : 'Создать заявку' }}
+            </button>
         </form>
     </div>
 </template>
@@ -282,6 +483,41 @@ input:hover, input:focus, select:hover, select:focus {
     width: 100%;
     box-sizing: border-box;
     margin-top: 10px;
+}
+
+.btn:hover:not(:disabled) {
+    background-color: #A8D90F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(190, 248, 13, 0.3);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    background-color: rgba(255, 59, 48, 0.1);
+    border: 1px solid rgba(255, 59, 48, 0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #FF3B30;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.success-message {
+    background-color: rgba(52, 199, 89, 0.1);
+    border: 1px solid rgba(52, 199, 89, 0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #34C759;
+    font-size: 14px;
+    margin: 10px 0;
 }
 
 /* Адаптивность */
