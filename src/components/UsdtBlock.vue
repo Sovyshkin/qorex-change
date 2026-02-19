@@ -1,4 +1,29 @@
-<script setup></script>
+<script setup>
+// Плавный скролл к форме заявки
+// Плавный скролл к форме заявки с повторными попытками, если элемент ещё не рендерится
+const scrollToExchange = (attempt = 0) => {
+  const targetId = 'exchange-title'
+  const el = document.getElementById(targetId)
+  if (el) {
+    const headerHeight = 80
+    const elementPosition = el.getBoundingClientRect().top + window.scrollY - headerHeight
+    window.scrollTo({ top: elementPosition, behavior: 'smooth' })
+    return true
+  }
+  if (attempt < 20) {
+    setTimeout(() => scrollToExchange(attempt + 1), 100)
+  }
+  return false
+}
+
+const goToExchange = () => {
+  if (window.location.pathname !== '/') {
+    window.location.href = '/#exchange-title'
+  } else {
+    scrollToExchange()
+  }
+}
+</script>
 <template>
     <section class="usdt-block">
         <header class="left" v-motion-slide-visible-left>
@@ -13,7 +38,7 @@
             платежа.
           </p>
           <div>
-            <button class="btn" type="button" aria-label="Начать процесс покупки USDT">
+            <button class="btn" type="button" aria-label="Начать процесс покупки USDT" @click="goToExchange">
               Купить USDT
             </button>
           </div>

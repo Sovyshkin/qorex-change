@@ -17,9 +17,9 @@
       </li>
     </nav>
     
-    <!-- Desktop Login Button -->
-    <button class="btn desktop-btn" v-motion-slide-visible-right>
-      Войти
+    <!-- Desktop Buy Button -->
+    <button class="btn desktop-btn" v-motion-slide-visible-right @click="goToBuy">
+      Купить
     </button>
     
     <!-- Mobile Menu Button -->
@@ -47,9 +47,9 @@
         </nav>
         <button 
           class="btn mobile-btn" 
-          @click="closeMobileMenu"
+          @click="goToBuy"
         >
-          Войти
+          Купить
         </button>
       </div>
     </transition>
@@ -105,6 +105,33 @@ const handleNavigation = (item: any) => {
 const goToHome = () => {
   if (window.location.pathname !== '/') {
     window.location.href = '/'
+  }
+}
+
+// Переход к форме заявки (плавный скролл). Если элемент ещё не в DOM — повторяем попытки.
+const scrollToExchange = (attempt = 0) => {
+  const targetId = 'exchange-title'
+  const el = document.getElementById(targetId)
+  if (el) {
+    const headerHeight = 80
+    const elementPosition = el.getBoundingClientRect().top + window.scrollY - headerHeight
+    window.scrollTo({ top: elementPosition, behavior: 'smooth' })
+    closeMobileMenu()
+    return true
+  }
+
+  if (attempt < 20) {
+    setTimeout(() => scrollToExchange(attempt + 1), 100)
+  }
+  return false
+}
+
+const goToBuy = () => {
+  if (window.location.pathname !== '/') {
+    // Переход на главную с хэшем — браузер должен прокрутить после загрузки
+    window.location.href = '/#exchange-title'
+  } else {
+    scrollToExchange()
   }
 }
 
