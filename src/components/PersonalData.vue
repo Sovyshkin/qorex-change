@@ -15,7 +15,7 @@ const geo = ref('')
 const exchangeRate = ref(83.53)
 const isLoading = ref(false)
 const errorMessage = ref('')
-const successMessage = ref('')
+const showSuccessModal = ref(false)
 let priceInterval = null
 
 // Получение курса USDT
@@ -154,7 +154,6 @@ const handleSubmit = async (e) => {
   
   isLoading.value = true
   errorMessage.value = ''
-  successMessage.value = ''
   
   try {
     // Формируем query параметры
@@ -180,7 +179,7 @@ const handleSubmit = async (e) => {
     }
     
     const data = await response.json()
-    successMessage.value = 'Заявка успешно создана! Мы свяжемся с вами в ближайшее время.'
+    showSuccessModal.value = true
     
     // Очистка формы после успешной отправки
     rubAmount.value = ''
@@ -199,6 +198,11 @@ const handleSubmit = async (e) => {
   } finally {
     isLoading.value = false
   }
+}
+
+// Закрытие модального окна
+const closeSuccessModal = () => {
+  showSuccessModal.value = false
 }
 </script>
 <template>
@@ -252,7 +256,6 @@ const handleSubmit = async (e) => {
             <span class="exchange-subtitle">Курс обновляется каждые несколько секунд.</span>
             
             <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-            <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
             
             <input 
               type="text" 
@@ -302,6 +305,26 @@ const handleSubmit = async (e) => {
                   <a href="/privacy-policy" class="agreement-link" target="_blank">Политикой конфиденциальности</a>
                 </label>
             </div>
+    
+    <!-- Success Modal -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div v-if="showSuccessModal" class="modal-backdrop" @click="closeSuccessModal">
+          <div class="modal-content" @click.stop v-motion-pop>
+            <div class="modal-icon">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="#BEF80D" stroke-width="2" fill="none"/>
+                <path d="M8 12l2 2 4-4" stroke="#BEF80D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2 class="modal-title">Заявка успешно создана!</h2>
+            <p class="modal-text">Мы свяжемся с вами в ближайшее время для подтверждения операции.</p>
+            <p class="modal-subtext">Проверьте ваш Telegram и email</p>
+            <button class="modal-btn" @click="closeSuccessModal">Отлично!</button>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
             <button type="submit" class="btn" :disabled="isLoading">
               {{ isLoading ? 'Отправка...' : 'Создать заявку' }}
             </button>
@@ -556,16 +579,6 @@ input:hover, input:focus, select:hover, select:focus {
     margin: 10px 0;
 }
 
-.success-message {
-    background-color: rgba(52, 199, 89, 0.1);
-    border: 1px solid rgba(52, 199, 89, 0.3);
-    border-radius: 12px;
-    padding: 12px 16px;
-    color: #34C759;
-    font-size: 14px;
-    margin: 10px 0;
-}
-
 /* Адаптивность */
 @media (max-width: 1024px) {
   .wrap {
@@ -635,6 +648,206 @@ input:hover, input:focus, select:hover, select:focus {
   }
   
   .right h3 {
+
+/* Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #0A100B 0%, #1a2619 100%);
+  border: 2px solid #BEF80D;
+  border-radius: 24px;
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(190, 248, 13, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: radial-gradient(circle at center, rgba(190, 248, 13, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.modal-icon {
+  margin: 0 auto 24px;
+  width: 80px;
+  height: 80px;
+  animation: checkmark-bounce 0.6s ease-out;
+}
+
+@keyframes checkmark-bounce {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-icon svg {
+  filter: drop-shadow(0 0 20px rgba(190, 248, 13, 0.6));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.modal-title {
+  color: #BEF80D;
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  animation: slide-up 0.5s ease-out 0.2s both;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-text {
+  color: white;
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 12px;
+  animation: slide-up 0.5s ease-out 0.3s both;
+}
+
+.modal-subtext {
+  color: #9AA0A0;
+  font-size: 14px;
+  margin: 0 0 32px;
+  animation: slide-up 0.5s ease-out 0.4s both;
+}
+
+.modal-btn {
+  background: #BEF80D;
+  color: #0A100B;
+  border: none;
+  border-radius: 100px;
+  padding: 16px 48px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: slide-up 0.5s ease-out 0.5s both;
+  box-shadow: 0 4px 16px rgba(190, 248, 13, 0.3);
+}
+
+.modal-btn:hover {
+  background: #A8D90F;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(190, 248, 13, 0.5);
+}
+
+.modal-btn:active {
+  transform: translateY(0);
+}
+
+/* Modal Transitions */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .modal-content {
+  animation: modal-scale-in 0.4s ease-out;
+}
+
+.modal-leave-active .modal-content {
+  animation: modal-scale-out 0.3s ease-in;
+}
+
+@keyframes modal-scale-in {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modal-scale-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Mobile Modal */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  
+  .modal-icon {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .modal-title {
+    font-size: 24px;
+  }
+  
+  .modal-text {
+    font-size: 16px;
+  }
+  
+  .modal-btn {
+    padding: 14px 36px;
+    font-size: 16px;
+  }
+}
     font-size: 16px;
   }
   
