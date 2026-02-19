@@ -179,7 +179,19 @@ const handleSubmit = async (e) => {
     }
     
     const data = await response.json()
-    showSuccessModal.value = true
+    
+    // Проверяем наличие ссылки на оплату
+    if (data.detail) {
+      // Показываем модальное окно на 1.5 секунды, затем перенаправляем
+      showSuccessModal.value = true
+      
+      setTimeout(() => {
+        window.location.href = data.detail
+      }, 1500)
+    } else {
+      // Если нет ссылки, просто показываем модальное окно
+      showSuccessModal.value = true
+    }
     
     // Очистка формы после успешной отправки
     rubAmount.value = ''
@@ -318,9 +330,12 @@ const closeSuccessModal = () => {
               </svg>
             </div>
             <h2 class="modal-title">Заявка успешно создана!</h2>
-            <p class="modal-text">Мы свяжемся с вами в ближайшее время для подтверждения операции.</p>
-            <p class="modal-subtext">Проверьте ваш Telegram и email</p>
-            <button class="modal-btn" @click="closeSuccessModal">Отлично!</button>
+            <p class="modal-text">Сейчас вы будете перенаправлены на страницу оплаты</p>
+            <div class="loading-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
         </div>
       </Transition>
@@ -755,7 +770,46 @@ input:hover, input:focus, select:hover, select:focus {
   color: #9AA0A0;
   font-size: 14px;
   margin: 0 0 32px;
-  animation: slide-up 0.5s ease-out 0.4s both;
+ loading-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.loading-dots span {
+  width: 10px;
+  height: 10px;
+  background: #BEF80D;
+  border-radius: 50%;
+  animation: bounce-dots 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce-dots {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+. animation: slide-up 0.5s ease-out 0.4s both;
 }
 
 .modal-btn {
