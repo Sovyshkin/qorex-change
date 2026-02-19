@@ -770,7 +770,10 @@ input:hover, input:focus, select:hover, select:focus {
   color: #9AA0A0;
   font-size: 14px;
   margin: 0 0 32px;
- loading-dots {
+  animation: slide-up 0.5s ease-out 0.4s both;
+}
+
+.loading-dots {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -807,9 +810,6 @@ input:hover, input:focus, select:hover, select:focus {
     transform: scale(1.2);
     opacity: 1;
   }
-}
-
-. animation: slide-up 0.5s ease-out 0.4s both;
 }
 
 .modal-btn {
